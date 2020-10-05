@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 client = MongoClient(port=27017)
 #serverStatusResult = db.command("serverStatus")
-#pprint(serverStatusResult)
+#print(serverStatusResult)
 db = client.dadosabertos
 collection = db.deputados
 
