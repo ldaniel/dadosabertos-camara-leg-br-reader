@@ -1,11 +1,14 @@
+import json
 from pymongo import MongoClient
-# pprint library is used to make the output look more pretty
-from pprint import pprint
 
-# connect to MongoDB, change the << MONGODB URL >> to reflect your own connection string
 client = MongoClient(port=27017)
-db = client.admin
+#serverStatusResult = db.command("serverStatus")
+#pprint(serverStatusResult)
+db = client.dadosabertos
+collection = db.deputados
 
-# Issue the serverStatus command and print the results
-serverStatusResult = db.command("serverStatus")
-pprint(serverStatusResult)
+with open('../data/json/response_deputados.json', encoding='utf-8') as json_file:
+    data = json.load(json_file)
+
+    for deputado in data['dados']:
+        collection.insert_one(deputado)
